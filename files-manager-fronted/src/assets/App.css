@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+}
+
+@font-face{
+  font-family:helvetica_neue;
+  src: url(http://josh-ruther4d.com/Fonts/HelveticaNeueLite.otf);
+}
