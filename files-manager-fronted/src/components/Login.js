@@ -10,6 +10,10 @@ function Login() {
     setState({ ...state, [event.target.name]: event.target.value });
   }
 
+  const handleRegister = () => {
+    window.location = "/register";
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (state.email === "" || state.password === "") {
@@ -19,9 +23,9 @@ function Login() {
       const encodeData = btoa(str);
       try {
         await axios.get('http://localhost:5000/connect', { headers: { 'Authorization': `Basic: ${encodeData}`} })
-        .then((res) => {
-          localStorage.setItem("token", res.data.token);
-          window.location = "/dash";
+          .then((res) => {
+            localStorage.setItem("token", res.data.token);
+            window.location = "/dash";
         });
       } catch(e) {
         alert('Email or password invalid!');
@@ -97,6 +101,9 @@ function Login() {
               </div>
               <div id="mensaje"></div>
             </form>
+            <div className="form-group form-button">
+              <button onClick={handleRegister}>Sing up</button>
+            </div>
           </div>
         </div>
       </div>
