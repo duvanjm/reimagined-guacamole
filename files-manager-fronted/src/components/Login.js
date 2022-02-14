@@ -13,7 +13,6 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (state.email === "" || state.password === "") {
-      console.log("alert")
       alert('Enter email and password');
     } else {
       const str = `${state.email}:${state.password}`
