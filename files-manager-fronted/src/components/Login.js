@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../assets/Login.css'
+import '../assets/Login.css';
 import axios from 'axios';
 
 function Login() {
@@ -25,7 +25,12 @@ function Login() {
         await axios.get('http://localhost:5000/connect', { headers: { 'Authorization': `Basic: ${encodeData}`} })
           .then((res) => {
             localStorage.setItem("token", res.data.token);
-            window.location = "/dash";
+            axios.get('http://localhost:5000/users/me', { headers: { 'X-Token': localStorage.getItem('token') } })
+              .then((res) => {
+                const name = res.data.email;
+                localStorage.setItem('name', name);
+                window.location = "/dash/" + name;
+              });
         });
       } catch(e) {
         alert('Email or password invalid!');
@@ -35,8 +40,9 @@ function Login() {
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
+    const name = localStorage.getItem('name');
     if (token) {
-      window.location = "/dash";
+      window.location = "/dash/" + name;
     } 
   }, []);
 
@@ -44,7 +50,7 @@ function Login() {
     <section className="main sign-in">
       <div className="container">
         <div className="signin-content">
-          <div className="signin-form">
+          <div className="login-form">
             <h2 className="form-title">Sign up</h2>
             <form
               method="GET"
@@ -61,7 +67,7 @@ function Login() {
                   name="email"
                   onChange={handleChange}
                   id="email"
-                  placeholder="Your email"
+                  placeholder="Your username"
                 />
               </div>
               <div className="form-group">
@@ -90,19 +96,24 @@ function Login() {
                   Remember me
                 </label>
               </div>
-              <div className="form-group form-button">
-                <input
+              <div className="form-group">
+                <input className='buttons'
                   type="submit"
                   name="signin"
                   id="signin"
-                  className="form-submit"
                   value="Log in"
                 />
               </div>
               <div id="mensaje"></div>
             </form>
-            <div className="form-group form-button">
-              <button onClick={handleRegister}>Sing up</button>
+            <div className="form-group ">
+              <input className='buttons'
+                type="submit"
+                name="signin"
+                id="signin"
+                value="Sign up"
+                onClick={handleRegister}
+                />
             </div>
           </div>
         </div>

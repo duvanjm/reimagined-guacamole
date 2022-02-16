@@ -1,4 +1,5 @@
 import axios from 'axios';
+import '../assets/Login.css';
 import React, { useState } from 'react';
 
 function Register() {
@@ -13,8 +14,9 @@ function Register() {
     event.preventDefault();
     if (state.email === "" || state.password === "" || state.confirm_pwd === "") {
       alert('Enter email and password');
-    } if (state.password.length < 7) {
+    } if (state.password.length < 8) {
       alert('Password must be longer than 8 characters');
+      return
     } if (state.password !== state.confirm_pwd) {
       alert('Password does not match');
     } else {
@@ -39,10 +41,9 @@ function Register() {
 
   return (
     <section className="main sign-in">
-      <h1>Register</h1>
       <div className="container">
         <div className="signin-content">
-          <div className="signin-form">
+          <div className="login-form">
             <h2 className="form-title">Register</h2>
             <form
               method="POST"
@@ -87,11 +88,10 @@ function Register() {
                 />
               </div>
               <div className="form-group form-button">
-                <input
+                <input className="buttons"
                   type="submit"
                   name="signin"
                   id="signin"
-                  className="form-submit"
                   value="Submit"
                 />
               </div>

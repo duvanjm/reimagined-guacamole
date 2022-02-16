@@ -9,17 +9,17 @@ import Register from './components/Register'
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path='/dash'>
-        <Route path='/dash' exact component={App}/>
+      <Route path="/dash/">
+        <Route path="/dash/:name" exact component={App}/>
       </Route>
-      <Route path='/login' exact component={Login}/>
-      <Route path='/' exact>
-        <Redirect from='/' to='/login'/>
+      <Route path="/login" exact component={Login}/>
+      <Route path="/" exact>
+        <Redirect from="/" to="/login"/>
       </Route>
-      <Route path='/register'>
-        <Route path='/register' exact component={Register}/>
+      <Route path="/register">
+        <Route path="/register" exact component={Register}/>
       </Route>
-      <Redirect from='*' to='/404'/>
+      <Redirect from="*" to="/404"/>
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
