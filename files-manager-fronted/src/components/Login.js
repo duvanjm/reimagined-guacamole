@@ -51,7 +51,7 @@ function Login() {
       <div className="container">
         <div className="signin-content">
           <div className="login-form">
-            <h2 className="form-title">Sign up</h2>
+            <h2 className="form-title">Log in</h2>
             <form
               method="GET"
               onSubmit={handleSubmit}
