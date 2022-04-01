@@ -130,6 +130,7 @@ class FilesController {
       if (parentId === '0') {
         const search = await dbClient.db.collection('files').find({ parentId: parseInt(parentId, 10) }).toArray();
         if (search) {
+          search[0].data = Buffer.from(search[0].data, 'base64').toString('ascii');
           return res.status(200).send(search);
         }
       } else if (parentId !== 0) {
